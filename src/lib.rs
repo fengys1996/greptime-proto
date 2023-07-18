@@ -20,3 +20,58 @@ pub mod prometheus {
         tonic::include_proto!("prometheus");
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use std::collections::HashMap;
+
+    use prost::Message;
+
+    use crate::v1::meta::{HeartbeatRequest, RegionStat, TableName};
+
+    #[test]
+    fn test_payload_of_heartbeat() {
+        print_payload_size_of_heartbeat(100);
+        print_payload_size_of_heartbeat(1000);
+        print_payload_size_of_heartbeat(10000);
+        print_payload_size_of_heartbeat(100000);
+    }
+
+    fn print_payload_size_of_heartbeat(region_num: usize) {
+        let req = HeartbeatRequest {
+            region_stats: mock_region_stats(region_num),
+            ..Default::default()
+        };
+
+        println!(
+            "The size of payload: {} KB, Region number: {}, ",
+            req.encode_to_vec().len() as f32 / 1024.0,
+            region_num,
+        );
+    }
+
+    fn mock_region_stats(region_num: usize) -> Vec<RegionStat> {
+        let mut v = Vec::with_capacity(region_num);
+        for _ in 0..region_num {
+            v.push(mock_region_stat());
+        }
+        v
+    }
+
+    fn mock_region_stat() -> RegionStat {
+        let table_name = TableName {
+            catalog_name: "1234567890123".to_string(),
+            schema_name: "1234567890123".to_string(),
+            table_name: "1234567890123".to_string(),
+        };
+        RegionStat {
+            region_id: 1,
+            table_name: Some(table_name),
+            rcus: 1000000,
+            wcus: 1000000,
+            approximate_bytes: 1000000,
+            approximate_rows: 1000000,
+            attrs: HashMap::new(),
+        }
+    }
+}
