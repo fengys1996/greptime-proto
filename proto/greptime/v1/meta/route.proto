@@ -93,4 +93,5 @@ message Partition {
 message TableRouteValue {
   repeated Peer peers = 1;
   TableRoute table_route = 2;
+  uint64 version = 3;
 }
