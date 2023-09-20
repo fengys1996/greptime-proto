@@ -41,7 +41,20 @@ message GreptimeRequest {
     DeleteRequests deletes = 5;
     RowInsertRequests row_inserts = 6;
     RowDeleteRequests row_deletes = 7;
+    AppendSSTRequests append_sst = 8;
   }
+}
+message AppendSSTRequests {
+  repeated AppendSSTRequest requests = 1;
+}
+
+message AppendSSTRequest {
+  string table_name = 1;
+  uint64 region_id = 2;
+  string file_id = 3;
+  uint64 file_size = 4;
+  int64 min_ts = 5;
+  int64 max_ts = 6;
 }
 
 message GreptimeResponse {
