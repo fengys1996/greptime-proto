@@ -30,6 +30,7 @@ message NotificationRequest {
 	uint32 start_offset = 5;
 	uint32 end_offset = 6;
 	uint32 check_sum = 7;
+	string client_id = 8;
 }
   
 message NotificationResponse {
