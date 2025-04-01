@@ -33,6 +33,7 @@ message DdlRequest {
     AlterExpr alter = 3;
     DropTableExpr drop_table = 4;
     FlushTableExpr flush_table = 5;
+    TableStorageConfigExpr table_storeage_config = 6;
   }
 }
 
@@ -76,6 +77,13 @@ message FlushTableExpr {
   string table_name = 3;
   optional uint32 region_number = 4;
   TableId table_id = 5;
+}
+
+message TableStorageConfigExpr {
+  string catalog_name = 1;
+  string schema_name = 2;
+  string table_name = 3;
+  uint64 table_ttl = 4;
 }
 
 message CreateDatabaseExpr {
