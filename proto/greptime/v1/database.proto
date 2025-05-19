@@ -46,7 +46,14 @@ message GreptimeRequest {
 
 message GreptimeResponse {
   ResponseHeader header = 1;
-  oneof response { AffectedRows affected_rows = 2; }
+  oneof response { 
+    AffectedRows affected_rows = 2; 
+    Arrow arrow_resp = 3;
+  }
+}
+
+message Arrow {
+  bytes data = 1;
 }
 
 message QueryRequest {
