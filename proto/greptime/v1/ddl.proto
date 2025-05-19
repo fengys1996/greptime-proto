@@ -270,6 +270,7 @@ message SetSkipping {
 message UnsetSkipping {
     string column_name = 1;
 }
+
 message AlterDatabaseExpr {
     string catalog_name = 1;
     string schema_name = 2;
@@ -285,4 +286,54 @@ message SetDatabaseOptions {
 
 message UnsetDatabaseOptions {
     repeated string keys = 1;
+}
+
+// The create trigger expression.
+// Usually the expression is parsed from a SQL statement.
+message CreateTriggerExpr {
+  string catalog_name = 1;
+  string trigger_name = 2;
+  bool create_if_not_exists = 3;
+  // The SQL statement to be executed periodically.
+  string sql = 4;
+  // The available channels for sending notifications.
+  repeated Channel channels = 5;
+  // The trigger severity level.
+  Severity severity = 6;
+  // The user-defined labels.
+  map<string, string> labels = 7;
+  // The user-defined annotations.
+  map<string, string> annotations = 8;
+  // The execution interval for sql query in milliseconds.
+  uint64 interval = 9;
+}
+
+// The trigger severity level.
+enum Severity {
+  Unknown = 0;
+  Info = 1;
+  Warning = 2;
+  Critical = 3;
+}
+
+// The notification channel for trigger.
+message Channel {
+  oneof options {
+    AlertManagerOptions alert_manager_opts = 1;
+  }
+}
+
+// The options for AlertManager channel.
+message AlertManagerOptions {
+  // The URL of the AlertManager API endpoint.
+  //
+  // e.g., "http://localhost:9093".
+  string url = 1;
+  // The timeout duration for the HTTP request. Unit: millisecond.
+  //
+  // The timeout is applied from when the request starts connecting until the
+  // response body has finished.
+  //
+  // Note: if the timeout is 0, it means no timeout is applied.
+  uint64 timeout = 2;
 }
