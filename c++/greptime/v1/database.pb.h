@@ -51,6 +51,9 @@ struct TableStruct_greptime_2fv1_2fdatabase_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_greptime_2fv1_2fdatabase_2eproto;
 namespace greptime {
 namespace v1 {
+class Arrow;
+struct ArrowDefaultTypeInternal;
+extern ArrowDefaultTypeInternal _Arrow_default_instance_;
 class DeleteRequest;
 struct DeleteRequestDefaultTypeInternal;
 extern DeleteRequestDefaultTypeInternal _DeleteRequest_default_instance_;
@@ -90,6 +93,7 @@ extern RowInsertRequestsDefaultTypeInternal _RowInsertRequests_default_instance_
 }  // namespace v1
 }  // namespace greptime
 PROTOBUF_NAMESPACE_OPEN
+template<> ::greptime::v1::Arrow* Arena::CreateMaybeMessage<::greptime::v1::Arrow>(Arena*);
 template<> ::greptime::v1::DeleteRequest* Arena::CreateMaybeMessage<::greptime::v1::DeleteRequest>(Arena*);
 template<> ::greptime::v1::DeleteRequests* Arena::CreateMaybeMessage<::greptime::v1::DeleteRequests>(Arena*);
 template<> ::greptime::v1::GreptimeRequest* Arena::CreateMaybeMessage<::greptime::v1::GreptimeRequest>(Arena*);
@@ -457,6 +461,7 @@ class GreptimeResponse final :
   }
   enum ResponseCase {
     kAffectedRows = 2,
+    kArrowResp = 3,
     RESPONSE_NOT_SET = 0,
   };
 
@@ -540,6 +545,7 @@ class GreptimeResponse final :
   enum : int {
     kHeaderFieldNumber = 1,
     kAffectedRowsFieldNumber = 2,
+    kArrowRespFieldNumber = 3,
   };
   // .greptime.v1.ResponseHeader header = 1;
   bool has_header() const;
@@ -577,12 +583,31 @@ class GreptimeResponse final :
       ::greptime::v1::AffectedRows* affected_rows);
   ::greptime::v1::AffectedRows* unsafe_arena_release_affected_rows();
 
+  // .greptime.v1.Arrow arrow_resp = 3;
+  bool has_arrow_resp() const;
+  private:
+  bool _internal_has_arrow_resp() const;
+  public:
+  void clear_arrow_resp();
+  const ::greptime::v1::Arrow& arrow_resp() const;
+  PROTOBUF_NODISCARD ::greptime::v1::Arrow* release_arrow_resp();
+  ::greptime::v1::Arrow* mutable_arrow_resp();
+  void set_allocated_arrow_resp(::greptime::v1::Arrow* arrow_resp);
+  private:
+  const ::greptime::v1::Arrow& _internal_arrow_resp() const;
+  ::greptime::v1::Arrow* _internal_mutable_arrow_resp();
+  public:
+  void unsafe_arena_set_allocated_arrow_resp(
+      ::greptime::v1::Arrow* arrow_resp);
+  ::greptime::v1::Arrow* unsafe_arena_release_arrow_resp();
+
   void clear_response();
   ResponseCase response_case() const;
   // @@protoc_insertion_point(class_scope:greptime.v1.GreptimeResponse)
  private:
   class _Internal;
   void set_has_affected_rows();
+  void set_has_arrow_resp();
 
   inline bool has_response() const;
   inline void clear_has_response();
@@ -596,10 +621,164 @@ class GreptimeResponse final :
       constexpr ResponseUnion() : _constinit_{} {}
         ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
       ::greptime::v1::AffectedRows* affected_rows_;
+      ::greptime::v1::Arrow* arrow_resp_;
     } response_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     uint32_t _oneof_case_[1];
 
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_greptime_2fv1_2fdatabase_2eproto;
+};
+// -------------------------------------------------------------------
+
+class Arrow final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:greptime.v1.Arrow) */ {
+ public:
+  inline Arrow() : Arrow(nullptr) {}
+  ~Arrow() override;
+  explicit PROTOBUF_CONSTEXPR Arrow(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Arrow(const Arrow& from);
+  Arrow(Arrow&& from) noexcept
+    : Arrow() {
+    *this = ::std::move(from);
+  }
+
+  inline Arrow& operator=(const Arrow& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Arrow& operator=(Arrow&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Arrow& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Arrow* internal_default_instance() {
+    return reinterpret_cast<const Arrow*>(
+               &_Arrow_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(Arrow& a, Arrow& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Arrow* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Arrow* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Arrow* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Arrow>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Arrow& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const Arrow& from) {
+    Arrow::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Arrow* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "greptime.v1.Arrow";
+  }
+  protected:
+  explicit Arrow(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDataFieldNumber = 1,
+  };
+  // bytes data = 1;
+  void clear_data();
+  const std::string& data() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_data(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_data();
+  PROTOBUF_NODISCARD std::string* release_data();
+  void set_allocated_data(std::string* data);
+  private:
+  const std::string& _internal_data() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_data(const std::string& value);
+  std::string* _internal_mutable_data();
+  public:
+
+  // @@protoc_insertion_point(class_scope:greptime.v1.Arrow)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_greptime_2fv1_2fdatabase_2eproto;
@@ -662,7 +841,7 @@ class QueryRequest final :
                &_QueryRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(QueryRequest& a, QueryRequest& b) {
     a.Swap(&b);
@@ -894,7 +1073,7 @@ class InsertIntoPlan final :
                &_InsertIntoPlan_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(InsertIntoPlan& a, InsertIntoPlan& b) {
     a.Swap(&b);
@@ -1067,7 +1246,7 @@ class InsertRequests final :
                &_InsertRequests_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(InsertRequests& a, InsertRequests& b) {
     a.Swap(&b);
@@ -1224,7 +1403,7 @@ class InsertRequest final :
                &_InsertRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(InsertRequest& a, InsertRequest& b) {
     a.Swap(&b);
@@ -1408,7 +1587,7 @@ class DeleteRequests final :
                &_DeleteRequests_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(DeleteRequests& a, DeleteRequests& b) {
     a.Swap(&b);
@@ -1565,7 +1744,7 @@ class DeleteRequest final :
                &_DeleteRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    8;
 
   friend void swap(DeleteRequest& a, DeleteRequest& b) {
     a.Swap(&b);
@@ -1749,7 +1928,7 @@ class RowInsertRequests final :
                &_RowInsertRequests_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(RowInsertRequests& a, RowInsertRequests& b) {
     a.Swap(&b);
@@ -1906,7 +2085,7 @@ class RowInsertRequest final :
                &_RowInsertRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(RowInsertRequest& a, RowInsertRequest& b) {
     a.Swap(&b);
@@ -2079,7 +2258,7 @@ class RowDeleteRequests final :
                &_RowDeleteRequests_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(RowDeleteRequests& a, RowDeleteRequests& b) {
     a.Swap(&b);
@@ -2236,7 +2415,7 @@ class RowDeleteRequest final :
                &_RowDeleteRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(RowDeleteRequest& a, RowDeleteRequest& b) {
     a.Swap(&b);
@@ -3055,6 +3234,80 @@ inline ::greptime::v1::AffectedRows* GreptimeResponse::mutable_affected_rows() {
   return _msg;
 }
 
+// .greptime.v1.Arrow arrow_resp = 3;
+inline bool GreptimeResponse::_internal_has_arrow_resp() const {
+  return response_case() == kArrowResp;
+}
+inline bool GreptimeResponse::has_arrow_resp() const {
+  return _internal_has_arrow_resp();
+}
+inline void GreptimeResponse::set_has_arrow_resp() {
+  _impl_._oneof_case_[0] = kArrowResp;
+}
+inline void GreptimeResponse::clear_arrow_resp() {
+  if (_internal_has_arrow_resp()) {
+    if (GetArenaForAllocation() == nullptr) {
+      delete _impl_.response_.arrow_resp_;
+    }
+    clear_has_response();
+  }
+}
+inline ::greptime::v1::Arrow* GreptimeResponse::release_arrow_resp() {
+  // @@protoc_insertion_point(field_release:greptime.v1.GreptimeResponse.arrow_resp)
+  if (_internal_has_arrow_resp()) {
+    clear_has_response();
+    ::greptime::v1::Arrow* temp = _impl_.response_.arrow_resp_;
+    if (GetArenaForAllocation() != nullptr) {
+      temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.response_.arrow_resp_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::greptime::v1::Arrow& GreptimeResponse::_internal_arrow_resp() const {
+  return _internal_has_arrow_resp()
+      ? *_impl_.response_.arrow_resp_
+      : reinterpret_cast< ::greptime::v1::Arrow&>(::greptime::v1::_Arrow_default_instance_);
+}
+inline const ::greptime::v1::Arrow& GreptimeResponse::arrow_resp() const {
+  // @@protoc_insertion_point(field_get:greptime.v1.GreptimeResponse.arrow_resp)
+  return _internal_arrow_resp();
+}
+inline ::greptime::v1::Arrow* GreptimeResponse::unsafe_arena_release_arrow_resp() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:greptime.v1.GreptimeResponse.arrow_resp)
+  if (_internal_has_arrow_resp()) {
+    clear_has_response();
+    ::greptime::v1::Arrow* temp = _impl_.response_.arrow_resp_;
+    _impl_.response_.arrow_resp_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void GreptimeResponse::unsafe_arena_set_allocated_arrow_resp(::greptime::v1::Arrow* arrow_resp) {
+  clear_response();
+  if (arrow_resp) {
+    set_has_arrow_resp();
+    _impl_.response_.arrow_resp_ = arrow_resp;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:greptime.v1.GreptimeResponse.arrow_resp)
+}
+inline ::greptime::v1::Arrow* GreptimeResponse::_internal_mutable_arrow_resp() {
+  if (!_internal_has_arrow_resp()) {
+    clear_response();
+    set_has_arrow_resp();
+    _impl_.response_.arrow_resp_ = CreateMaybeMessage< ::greptime::v1::Arrow >(GetArenaForAllocation());
+  }
+  return _impl_.response_.arrow_resp_;
+}
+inline ::greptime::v1::Arrow* GreptimeResponse::mutable_arrow_resp() {
+  ::greptime::v1::Arrow* _msg = _internal_mutable_arrow_resp();
+  // @@protoc_insertion_point(field_mutable:greptime.v1.GreptimeResponse.arrow_resp)
+  return _msg;
+}
+
 inline bool GreptimeResponse::has_response() const {
   return response_case() != RESPONSE_NOT_SET;
 }
@@ -3064,6 +3317,60 @@ inline void GreptimeResponse::clear_has_response() {
 inline GreptimeResponse::ResponseCase GreptimeResponse::response_case() const {
   return GreptimeResponse::ResponseCase(_impl_._oneof_case_[0]);
 }
+// -------------------------------------------------------------------
+
+// Arrow
+
+// bytes data = 1;
+inline void Arrow::clear_data() {
+  _impl_.data_.ClearToEmpty();
+}
+inline const std::string& Arrow::data() const {
+  // @@protoc_insertion_point(field_get:greptime.v1.Arrow.data)
+  return _internal_data();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void Arrow::set_data(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.data_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:greptime.v1.Arrow.data)
+}
+inline std::string* Arrow::mutable_data() {
+  std::string* _s = _internal_mutable_data();
+  // @@protoc_insertion_point(field_mutable:greptime.v1.Arrow.data)
+  return _s;
+}
+inline const std::string& Arrow::_internal_data() const {
+  return _impl_.data_.Get();
+}
+inline void Arrow::_internal_set_data(const std::string& value) {
+  
+  _impl_.data_.Set(value, GetArenaForAllocation());
+}
+inline std::string* Arrow::_internal_mutable_data() {
+  
+  return _impl_.data_.Mutable(GetArenaForAllocation());
+}
+inline std::string* Arrow::release_data() {
+  // @@protoc_insertion_point(field_release:greptime.v1.Arrow.data)
+  return _impl_.data_.Release();
+}
+inline void Arrow::set_allocated_data(std::string* data) {
+  if (data != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.data_.SetAllocated(data, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.data_.IsDefault()) {
+    _impl_.data_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:greptime.v1.Arrow.data)
+}
+
 // -------------------------------------------------------------------
 
 // QueryRequest
@@ -4189,6 +4496,8 @@ inline void RowDeleteRequest::set_allocated_rows(::greptime::v1::Rows* rows) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
