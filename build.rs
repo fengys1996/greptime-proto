@@ -23,10 +23,6 @@ fn main() {
     tonic_build::configure()
         .file_descriptor_set_path(out_dir.join("greptime_grpc_desc.bin"))
         .type_attribute(
-            ".greptime.v1.SemanticType",
-            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
-        )
-        .type_attribute(
             ".greptime.v1.meta.Peer",
             "#[derive(::serde::Serialize, ::serde::Deserialize)]",
         )
@@ -46,11 +42,74 @@ fn main() {
             ".greptime.v1.meta.FlownodeWorkloads",
             "#[derive(::serde::Serialize, ::serde::Deserialize)]",
         )
+        .type_attribute(
+            ".greptime.v1.RowInsertRequests",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.RowInsertRequest",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.Rows",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.Row",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.ColumnSchema",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.ColumnDataType",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.SemanticType",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.ColumnDataTypeExtension",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.ColumnOptions",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.Values",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.Value",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.Decimal128",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.IntervalMonthDayNano",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.DecimalTypeExtension",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.JsonTypeExtension",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
+        .type_attribute(
+            ".greptime.v1.VectorTypeExtension",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
         .enum_attribute(
             "region.RegionRequest.body",
             "#[derive(strum_macros::AsRefStr)]",
         )
-        .bytes([".greptime.v1.ArrowIpc"])
         .compile_protos(
             &[
                 "proto/greptime/v1/database.proto",
