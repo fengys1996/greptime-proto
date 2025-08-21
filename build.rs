@@ -50,6 +50,10 @@ fn main() {
             "region.RegionRequest.body",
             "#[derive(strum_macros::AsRefStr)]",
         )
+        .type_attribute(
+            "greptime.v1.database.RowInsertRequests",
+            "#[derive(::serde::Serialize, ::serde::Deserialize)]",
+        )
         .bytes([".greptime.v1.ArrowIpc"])
         .compile_protos(
             &[
