@@ -84,8 +84,8 @@ message TableStorageConfigExpr {
   string schema_name = 2;
   string table_name = 3;
   uint64 table_ttl = 4;
-  uint64 high_disk_usage_threshold = 5;
-  uint64 low_disk_usage_threshold = 6;
+  optional uint64 high_disk_usage_threshold = 5;
+  optional uint64 low_disk_usage_threshold = 6;
 }
 
 message CreateDatabaseExpr {
